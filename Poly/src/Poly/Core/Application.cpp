@@ -21,12 +21,40 @@ namespace Poly
 
 	}
 
+	void Application::OnEvent(Event& e)
+	{
+		EventDispatcher dispatcher(e);
+		dispatcher.Dispatch<WindowCloseEvent>(PY_BIND_EVENT_FN(Application::OnWindowClose));
+		dispatcher.Dispatch<WindowResizeEvent>(PY_BIND_EVENT_FN(Application::OnWindowResize));
+	}
+
 	void Application::Run()
 	{
 		while (m_Running)
 		{
 
 		}
+	}
+
+	bool Application::OnWindowClose(WindowCloseEvent& e)
+	{
+		m_Running = false;
+
+		return true;
+	}
+
+	bool Application::OnWindowResize(WindowResizeEvent& e)
+	{
+		if (e.GetWidth() == 0 || e.GetHeight() == 0)
+		{
+			m_Minimized = true;
+
+			return false;
+		}
+
+		m_Minimized = false;
+
+		return true;
 	}
 
 }

@@ -16,6 +16,8 @@
 #define PY_EXPAND_MACRO(x) x
 #define PY_STRINGIFY_MACRO(x) #x
 
+#define PY_BIND_EVENT_FN(x) std::bind(&x, this, std::placeholders::_1)
+
 namespace Poly
 {
 

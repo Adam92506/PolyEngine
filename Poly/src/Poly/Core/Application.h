@@ -2,6 +2,8 @@
 
 #include "Base.h"
 
+#include "Poly/Events/ApplicationEvent.h"
+
 int main(int argc, char** argv);
 
 namespace Poly
@@ -32,9 +34,16 @@ namespace Poly
 		Application(const ApplicationSpecification& specification);
 		virtual ~Application();
 
+		void OnEvent(Event& e);
+
+		ApplicationSpecification& GetSpecification() { return m_Specification; }
+
 		static Application& Get() { return *s_Instance; }
 	private:
 		void Run();
+
+		bool OnWindowClose(WindowCloseEvent& e);
+		bool OnWindowResize(WindowResizeEvent& e);
 	private:
 		ApplicationSpecification m_Specification;
 
