@@ -2,6 +2,9 @@
 **/bin/
 bin-int/
 
+# Log Files
+**.log
+
 # Visual Studio
 .vs/
 **.sln
