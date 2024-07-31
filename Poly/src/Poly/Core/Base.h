@@ -13,6 +13,8 @@
 	#define PY_DEBUGBREAK()
 #endif
 
+#define BIT(x) (1 << x)
+
 #define PY_EXPAND_MACRO(x) x
 #define PY_STRINGIFY_MACRO(x) #x
 

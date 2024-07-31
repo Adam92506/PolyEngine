@@ -1,6 +1,10 @@
 #include "pch.h"
 #include "Application.h"
 
+#include "Poly/Core/Log.h"
+
+#include "Poly/Utils/PlatformUtils.h"
+
 namespace Poly
 {
 
@@ -26,20 +30,63 @@ namespace Poly
 		EventDispatcher dispatcher(e);
 		dispatcher.Dispatch<WindowCloseEvent>(PY_BIND_EVENT_FN(Application::OnWindowClose));
 		dispatcher.Dispatch<WindowResizeEvent>(PY_BIND_EVENT_FN(Application::OnWindowResize));
+
+		for (auto it = m_LayerStack.rbegin(); it != m_LayerStack.rend(); ++it)
+		{
+			if (e.Handled)
+				break;
+			(*it)->OnEvent(e);
+		}
+	}
+
+	void Application::PushLayer(Layer* layer)
+	{
+		m_LayerStack.PushLayer(layer);
+		layer->OnAttach();
+	}
+
+	void Application::PushOverlay(Layer* overlay)
+	{
+		m_LayerStack.PushOverlay(overlay);
+		overlay->OnAttach();
+	}
+
+	void Application::PopLayer(Layer* layer)
+	{
+		m_LayerStack.PopLayer(layer);
+	}
+
+	void Application::PopOverlay(Layer* overlay)
+	{
+		m_LayerStack.PopOverlay(overlay);
+	}
+
+	void Application::Close()
+	{
+		m_Running = false;
 	}
 
 	void Application::Run()
 	{
 		while (m_Running)
 		{
+			float time = Time::GetTime();
+			Timestep timestep = time - m_LastFrameTime;
+			m_LastFrameTime = time;
 
+			if (!m_Minimized)
+			{
+				for (Layer* layer : m_LayerStack)
+				{
+					layer->OnUpdate(timestep);
+				}
+			}
 		}
 	}
 
 	bool Application::OnWindowClose(WindowCloseEvent& e)
 	{
 		m_Running = false;
-
 		return true;
 	}
 

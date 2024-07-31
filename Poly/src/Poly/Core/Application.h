@@ -2,7 +2,12 @@
 
 #include "Base.h"
 
+#include "Poly/Core/Timestep.h"
+#include "Poly/Core/LayerStack.h"
+
+#include "Poly/Events/Event.h"
 #include "Poly/Events/ApplicationEvent.h"
+
 
 int main(int argc, char** argv);
 
@@ -36,6 +41,13 @@ namespace Poly
 
 		void OnEvent(Event& e);
 
+		void PushLayer(Layer* layer);
+		void PushOverlay(Layer* layer);
+		void PopLayer(Layer* layer);
+		void PopOverlay(Layer* overlay);
+
+		void Close();
+
 		ApplicationSpecification& GetSpecification() { return m_Specification; }
 
 		static Application& Get() { return *s_Instance; }
@@ -46,9 +58,10 @@ namespace Poly
 		bool OnWindowResize(WindowResizeEvent& e);
 	private:
 		ApplicationSpecification m_Specification;
-
+		LayerStack m_LayerStack;
 		bool m_Running = true;
 		bool m_Minimized = false;
+		float m_LastFrameTime = 0.0f;
 	private:
 		static Application* s_Instance;
 		friend int ::main(int argc, char** argv);
