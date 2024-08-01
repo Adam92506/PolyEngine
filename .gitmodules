@@ -1,3 +1,6 @@
 [submodule "Poly/vendor/spdlog"]
 	path = Poly/vendor/spdlog
 	url = git@github.com:gabime/spdlog.git
+[submodule "Poly/vendor/glfw"]
+	path = Poly/vendor/glfw
+	url = git@github.com:Adam92506/glfw.git

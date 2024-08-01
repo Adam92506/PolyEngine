@@ -1,3 +1,5 @@
+include "Dependencies.lua"
+
 workspace "PolyEngine"
 	architecture "x86_64"
 	startproject "Sandbox"
@@ -10,6 +12,10 @@ workspace "PolyEngine"
 	}
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
+
+group "Dependencies"
+	include "Poly/vendor/glfw"
+group ""
 
 group "Core"
 	include "Poly/premake5.lua"
