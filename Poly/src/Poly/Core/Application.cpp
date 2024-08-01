@@ -18,6 +18,9 @@ namespace Poly
 
 		if (!m_Specification.WorkingDirectory.empty())
 			std::filesystem::current_path(m_Specification.WorkingDirectory);
+
+		m_Window = Window::Create();
+		m_Window->SetEventCallback(PY_BIND_EVENT_FN(Application::OnEvent));
 	}
 
 	Application::~Application()
@@ -80,6 +83,8 @@ namespace Poly
 				{
 					layer->OnUpdate(timestep);
 				}
+
+				m_Window->OnUpdate();
 			}
 		}
 	}

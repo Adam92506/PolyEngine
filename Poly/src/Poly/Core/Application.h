@@ -2,6 +2,7 @@
 
 #include "Base.h"
 
+#include "Poly/Core/Window.h"
 #include "Poly/Core/Timestep.h"
 #include "Poly/Core/LayerStack.h"
 
@@ -58,6 +59,7 @@ namespace Poly
 		bool OnWindowResize(WindowResizeEvent& e);
 	private:
 		ApplicationSpecification m_Specification;
+		Scope<Window> m_Window;
 		LayerStack m_LayerStack;
 		bool m_Running = true;
 		bool m_Minimized = false;
