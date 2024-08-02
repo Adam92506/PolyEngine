@@ -7,11 +7,11 @@
 namespace Poly
 {
 
-	class WindowsWindow : public Window
+	class GLFWWindow : public Window
 	{
 	public:
-		WindowsWindow(const WindowSpecification& spec);
-		virtual ~WindowsWindow();
+		GLFWWindow(const WindowSpecification& spec);
+		virtual ~GLFWWindow();
 
 		virtual void OnUpdate() override;
 

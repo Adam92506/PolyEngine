@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "Platform/Windows/WindowsWindow.h"
+#include "Platform/Glfw/GLFWWindow.h"
 
 #include "Poly/Events/ApplicationEvent.h"
 #include "Poly/Events/MouseEvent.h"
@@ -14,17 +14,17 @@ namespace Poly
 		PY_CORE_ERROR("GLFW Error ({0}): {1}", error, description);
 	}
 
-	WindowsWindow::WindowsWindow(const WindowSpecification& spec)
+	GLFWWindow::GLFWWindow(const WindowSpecification& spec)
 	{
 		Init(spec);
 	}
 
-	WindowsWindow::~WindowsWindow()
+	GLFWWindow::~GLFWWindow()
 	{
 		Shutdown();
 	}
 
-	void WindowsWindow::Init(const WindowSpecification& spec)
+	void GLFWWindow::Init(const WindowSpecification& spec)
 	{
 		m_Data.Title = spec.Title;
 		m_Data.Width = spec.Width;
@@ -145,7 +145,7 @@ namespace Poly
 			});
 	}
 
-	void WindowsWindow::Shutdown()
+	void GLFWWindow::Shutdown()
 	{
 		glfwDestroyWindow(m_Window);
 		--s_GLFWWindowCount;
@@ -156,12 +156,12 @@ namespace Poly
 		}
 	}
 
-	void WindowsWindow::OnUpdate()
+	void GLFWWindow::OnUpdate()
 	{
 		glfwPollEvents();
 	}
 
-	void WindowsWindow::SetVSync(bool enabled)
+	void GLFWWindow::SetVSync(bool enabled)
 	{
 		if (enabled)
 			glfwSwapInterval(1);
