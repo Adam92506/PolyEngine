@@ -2,6 +2,8 @@
 
 #include "Poly/Core/Window.h"
 
+#include "Platform/OpenGL/OpenGLContext.h"
+
 #include <GLFW/glfw3.h>
 
 namespace Poly
@@ -28,6 +30,7 @@ namespace Poly
 		virtual void Shutdown();
 	private:
 		GLFWwindow* m_Window;
+		Scope<GraphicsContext> m_Context;
 
 		struct WindowData
 		{

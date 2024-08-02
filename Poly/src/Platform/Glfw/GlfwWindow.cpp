@@ -47,8 +47,8 @@ namespace Poly
 
 		m_Window = glfwCreateWindow(m_Data.Width, m_Data.Height, m_Data.Title.c_str(), nullptr, nullptr);
 
-		// TODO: Create thread-safe context manager
-		glfwMakeContextCurrent(m_Window);
+		m_Context = GraphicsContext::Create(m_Window);
+		m_Context->Init();
 
 		glfwSetWindowUserPointer(m_Window, &m_Data);
 		SetVSync(m_Data.VSync);
