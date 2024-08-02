@@ -13,6 +13,7 @@ namespace Poly
 		#ifdef PY_PLATFORM_WINDOWS
 			return CreateScope<GLFWWindow>(spec);
 		#else
+			PY_CORE_ERROR("Can not create window: Platform not supported");
 		#endif
 	}
 
