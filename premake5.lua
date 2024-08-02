@@ -15,6 +15,7 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
 group "Dependencies"
 	include "Poly/vendor/glfw"
+	include "Poly/vendor/glad"
 group ""
 
 group "Core"

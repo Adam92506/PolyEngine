@@ -10,6 +10,12 @@ project "Poly"
 	pchheader "pch.h"
 	pchsource "src/pch.cpp"
 
+	defines
+	{
+		"_CRT_SECURE_NO_WARNINGS",
+		"GLFW_INCLUDE_NONE"
+	}
+
 	files
 	{
 		"src/**.h",
@@ -20,12 +26,14 @@ project "Poly"
 	{
 		"src",
 		"vendor/spdlog/include",
-		"%{IncludeDir.glfw}"
+		"%{IncludeDir.glfw}",
+		"%{IncludeDir.glad}"
 	}
 
 	links
 	{
-		"GLFW"
+		"GLFW",
+		"Glad"
 	}
 
 	filter "system:windows"
